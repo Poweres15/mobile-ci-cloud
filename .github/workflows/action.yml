@@ -78,12 +78,12 @@ jobs:
           hdiutil detach "/Volumes/Appium 1.21.0" || hdiutil detach "/Volumes/Appium*"
 
       - run: |
-          cp -R ./appium-webdriveragent/* /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
           cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
           pwd
           xcodebuild  -project WebDriverAgent.xcodeproj  \
           -scheme WebDriverAgentRunner \
-          -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2'
+          -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2' \
+          CODE_SIGN_IDENTITY="${CODE_SIGN_IDENTITY}" DEVELOPMENT_TEAM="${TEAM_ID}"
           appium --base-path=/wd/hub -p 4723 '{"platformName": "iOS", "automationName": "XCUITest", "deviceName": "iPhone 14", "platformVersion": "17.0"}' &
 
       - name: Run the test
