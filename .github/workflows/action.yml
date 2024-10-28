@@ -34,10 +34,10 @@ jobs:
       #   run: |
       #     echo "NPM_CONFIG_PREFIX=~/.npm-global" >> $GITHUB_ENV
       #     echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
-      # - name: Start Appium Server
-      #   run: |
-      #     npm install -g appium@next
-      #     appium driver install xcuitest
+      - name: Start Appium Server
+        run: |
+          npm install -g appium@next
+          appium driver install xcuitest
 
       - name: www
         uses: actions/setup-python@v2
