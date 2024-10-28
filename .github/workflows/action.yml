@@ -71,9 +71,14 @@ jobs:
         run: |
           hdiutil attach Appium.dmg
 
+      - name: List Volumes for Debugging
+        run: |
+          ls /Volumes
+
       - name: Copy Appium to Applications
         run: |
-          cp -R "/Volumes/Appium/Appium.app" /Applications/
+          # Adjust path based on actual volume name after listing volumes
+          cp -R "/Volumes/Appium/Appium.app" /Applications/ || cp -R "/Volumes/Appium-*/Appium.app" /Applications/
 
       - name: Unmount the DMG file
         run: |
