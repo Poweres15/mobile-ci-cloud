@@ -26,6 +26,11 @@ jobs:
         run: |
           sudo xcode-select --switch /Applications/Xcode.app
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
       - name: Start Appium Server
         run: |
           npm install -g appium
