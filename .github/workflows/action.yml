@@ -32,7 +32,9 @@ jobs:
 
       - name: Start Appium Server
         run: |
+          npm install -g appium
           appium --base-path /wd/hub &
 
       - run: npm root -g
       - run: appium driver list
+      - run: which appium
