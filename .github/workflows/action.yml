@@ -39,8 +39,10 @@ jobs:
           appium driver install xcuitest
         # appium --base-path=/wd/hub -p 4723 &
 
+      - run: appium driver list
+
       - run: which appium
-      - run: ls -la /Users/runner/hostedtoolcache/node/16.20.1/arm64/lib/node_modules/appium
+      - run: ls -la /Users/runner/hostedtoolcache/node/16.20.1/arm64/lib/node_modules/appium/node_modules
       # - name: Set up Python
       #   uses: actions/setup-python@v2
       #   with:
