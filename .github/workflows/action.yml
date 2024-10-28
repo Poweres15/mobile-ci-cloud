@@ -43,6 +43,7 @@ jobs:
 
       - run: which appium
       - run: ls -la /usr/local/bin/node_modules
+      - run: sudo find / -name "WebDriverAgent.xcodeproj" 2>/dev/null
       #   uses: actions/setup-python@v2
       #   with:
       #     python-version: "3.x"
