@@ -68,10 +68,6 @@ jobs:
         run: |
           hdiutil attach Appium.dmg
 
-      - name: List Volumes for Debugging
-        run: |
-          ls /Volumes/Appium
-
       - name: Copy Appium to Applications
         run: |
           # Adjust path based on actual volume name after listing volumes
@@ -80,8 +76,6 @@ jobs:
       - name: Unmount the DMG file
         run: |
           hdiutil detach "/Volumes/Appium 1.21.0" || hdiutil detach "/Volumes/Appium*"
-
-      - run: xcrun simctl create arm-app com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-17-2
 
       - run: |
           cp -R ./appium-webdriveragent/* /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
