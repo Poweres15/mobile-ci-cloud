@@ -61,9 +61,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Boot iOS Simulator
-        run: xcrun simctl boot "B8B4F5F1-B485-4B84-8698-BCD628736511"
-
       - run: npm install -g appium-webdriveragent
 
       - run: |
