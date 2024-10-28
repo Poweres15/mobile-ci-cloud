@@ -84,7 +84,7 @@ jobs:
           -scheme WebDriverAgentRunner \
           -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2' \
           CODE_SIGN_IDENTITY="test" DEVELOPMENT_TEAM="test"
-          appium --base-path=/wd/hub -p 4723 --default-capabilities  '{"platformName": "iOS", "automationName": "XCUITest", "deviceName": "iPhone 14", "platformVersion": "17.2" ,"wdaLocalPort": 8100 }' &
+          appium --base-path=/wd/hub -p 4723 --default-capabilities '{"platformName": "iOS", "automationName": "XCUITest", "deviceName": "iPhone 14", "platformVersion": "17.2", "wdaLocalPort": 8100}' &
 
       - name: Run the test
         run: |
