@@ -87,6 +87,7 @@ jobs:
       - run: xcrun simctl create arm-app com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-17-2
 
       - run: |
+          cp -R ./appium-webdriveragent/* /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
           cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
           pwd
           xcodebuild  -project WebDriverAgent.xcodeproj  \
