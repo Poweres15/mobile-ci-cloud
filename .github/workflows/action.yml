@@ -36,4 +36,4 @@ jobs:
           npm install -g appium
           appium --base-path /wd/hub &
 
-      - run: lsof i :4723
+      - run: lsof -i :4723
