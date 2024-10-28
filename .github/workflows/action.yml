@@ -37,6 +37,7 @@ jobs:
 
       - name: Start Appium Server
         run: |
+          appium driver install xcuitest
           appium --base-path=/wd/hub -p 4723 &
 
       - name: Set up Python
