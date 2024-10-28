@@ -41,28 +41,28 @@ jobs:
           appium driver install xcuitest
           appium --base-path=/wd/hub -p 4723 &
 
-      # - name: Set up Python
-      #   uses: actions/setup-python@v2
-      #   with:
-      #     python-version: "3.x"
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
 
-      # - name: Cache Python packages
-      #   uses: actions/cache@v3
-      #   with:
-      #     # Cache location for pip
-      #     path: ~/.cache/pip
-      #     # Generate a unique key based on OS, Python version, and requirements.txt
-      #     key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-      #     # Use a partial key to restore similar caches if an exact match isn't found
-      #     restore-keys: |
-      #       ${{ runner.os }}-pip-
+      - name: Cache Python packages
+        uses: actions/cache@v3
+        with:
+          # Cache location for pip
+          path: ~/.cache/pip
+          # Generate a unique key based on OS, Python version, and requirements.txt
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          # Use a partial key to restore similar caches if an exact match isn't found
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
-      # - name: Install dependencies
-      #   run: |
-      #     pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
 
-      # - name: Boot iOS Simulator
-      #   run: xcrun simctl boot "B8B4F5F1-B485-4B84-8698-BCD628736511"
+      - name: Boot iOS Simulator
+        run: xcrun simctl boot "B8B4F5F1-B485-4B84-8698-BCD628736511"
 
       - run: npm install -g appium-webdriveragent
 
@@ -73,8 +73,8 @@ jobs:
            -scheme WebDriverAgentRunner \
            -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2'
 
-      # - name: Run the test
-      #   run: |
-      #     robot testcases/ios.robot
+      - name: Run the test
+        run: |
+          robot testcases/ios.robot
 
-      # - run: ls -l
+      - run: ls -l
