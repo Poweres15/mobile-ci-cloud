@@ -60,6 +60,9 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Boot iOS Simulator
+        run: xcrun simctl boot "iPhone 15"
+
       - name: Run the test
         run: |
           robot testcases/ios.robot
