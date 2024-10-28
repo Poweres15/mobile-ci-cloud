@@ -21,3 +21,10 @@ jobs:
         run: |
           # List available simulators for iOS, macOS, tvOS, and watchOS
           xcrun xctrace list devices
+
+      - name: Start Appium Server
+        run: |
+          npm install -g appium
+          appium --base-path /wd/hub &
+
+      - run: echo 'Done'
