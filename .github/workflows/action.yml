@@ -84,12 +84,14 @@ jobs:
         run: |
           hdiutil detach "/Volumes/Appium 1.21.0" || hdiutil detach "/Volumes/Appium*"
 
+      - run: xcrun simctl create arm-app com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-17-2
+
       - run: |
           cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
           pwd
           xcodebuild  -project WebDriverAgent.xcodeproj  \
           -scheme WebDriverAgentRunner \
-          -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2'
+          -destination 'platform=iOS Simulator,name=arm-app,OS=17.2'
           appium --base-path=/wd/hub -p 4723 &
 
       - name: Run the test
