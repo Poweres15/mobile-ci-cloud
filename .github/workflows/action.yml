@@ -39,10 +39,10 @@ jobs:
         run: |
           appium --base-path=/wd/hub -p 4723 &
 
-          - name: Set up Python
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
 
       - name: Cache Python packages
         uses: actions/cache@v3
