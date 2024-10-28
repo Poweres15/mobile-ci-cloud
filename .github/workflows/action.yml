@@ -23,7 +23,7 @@ jobs:
           node-version: "16"
 
       - name: Cache global npm packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /Users/runner/hostedtoolcache/node/16.20.1/arm64/lib/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
