@@ -1,4 +1,5 @@
-name: macOS Devices List
+name: iOS Simulator Test
+
 on:
   push:
     branches:
@@ -6,46 +7,34 @@ on:
   workflow_dispatch:
 
 jobs:
-  list-macos-devices:
+  run-ios-simulator-tests:
     runs-on: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Set up Xcode
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: "16"
+
+      # - name: Install Dependencies
       #   run: |
-      #     # Install necessary tools
-      #     sudo xcode-select --switch /Applications/Xcode.app
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16"
+      #     npm install
 
-      - name: Install Dependencies
+      - name: Set up Xcode and iOS Simulator
         run: |
-          npm install
-
-      - name: Cache npm globally installed packages
-        id: npm-cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.npm
-            $(npm root -g)
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-appium
-          restore-keys: |
-            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Install Appium if not cached
-        run: |
-          if ! command -v appium &> /dev/null; then
-            npm install -g appium
-          fi
+          sudo xcode-select --switch /Applications/Xcode.app
+          # Boot iOS Simulator
+          xcrun simctl boot "iPhone 12" || echo "iPhone 12 simulator already running"
+          # Wait for simulator to be fully ready
+          xcrun simctl bootstatus "iPhone 12" -b
 
       - name: Start Appium Server
         run: |
+          npm install -g appium
           appium --base-path /wd/hub &
         env:
           PATH: /usr/local/bin:$PATH
 
-      - run: lsof -i :4723
+      - run: lsof i :4723
