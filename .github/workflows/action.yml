@@ -22,13 +22,13 @@ jobs:
         with:
           node-version: "16"
 
-      - name: Cache npm global packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm-global
-          key: ${{ runner.os }}-npm-global-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-global-
+      # - name: Cache npm global packages
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.npm-global
+      #     key: ${{ runner.os }}-npm-global-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-npm-global-
 
       - name: Set npm global packages path
         run: |
@@ -37,7 +37,7 @@ jobs:
 
       - name: Start Appium Server
         run: |
-          npm install -g appium
+          npm install -g appium@1.21.0
           appium driver install xcuitest
           appium --base-path=/wd/hub -p 4723 &
 
