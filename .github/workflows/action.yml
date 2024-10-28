@@ -22,6 +22,8 @@ jobs:
         with:
           node-version: "16"
 
+      - run: /usr/bin/xcodebuild -version
+
       # - name: Cache npm global packages
       #   uses: actions/cache@v3
       #   with:
@@ -33,14 +35,14 @@ jobs:
       #   run: |
       #     echo "NPM_CONFIG_PREFIX=~/.npm-global" >> $GITHUB_ENV
       #     echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
-      - name: Start Appium Server
-        run: |
-          npm install -g appium@next
-          appium driver install xcuitest
+      # - name: Start Appium Server
+      #   run: |
+      #     npm install -g appium@next
+      #     appium driver install xcuitest
 
-      - run: appium driver list
+      # - run: appium driver list
 
-      # - run: which appium
+      # # - run: which appium
       # - run: ls -la /usr/local/bin
       # - run: sudo find / -name "WebDriverAgent.xcodeproj" 2>/dev/null
       #   uses: actions/setup-python@v2
@@ -58,45 +60,45 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-pip-
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+      # - name: Install dependencies
+      #   run: |
+      #     pip install -r requirements.txt
 
-      # - run: npm install -g appium-webdriveragent
-      - name: Download Appium dmg file
-        run: |
-          curl -L -o Appium.dmg https://github.com/appium/appium-desktop/releases/download/v1.21.0/Appium-mac-1.21.0.dmg
+      # # - run: npm install -g appium-webdriveragent
+      # - name: Download Appium dmg file
+      #   run: |
+      #     curl -L -o Appium.dmg https://github.com/appium/appium-desktop/releases/download/v1.21.0/Appium-mac-1.21.0.dmg
 
-      - name: Mount the DMG file
-        run: |
-          hdiutil attach Appium.dmg
+      # - name: Mount the DMG file
+      #   run: |
+      #     hdiutil attach Appium.dmg
 
       # - name: List Volumes for Debugging
       #   run: |
       #     ls /Volumes/Appium
 
-      - name: Copy Appium to Applications
-        run: |
-          # Adjust path based on actual volume name after listing volumes
-          cp -R "/Volumes/Appium 1.21.0/Appium.app" /Applications/
+      # - name: Copy Appium to Applications
+      #   run: |
+      #     # Adjust path based on actual volume name after listing volumes
+      #     cp -R "/Volumes/Appium 1.21.0/Appium.app" /Applications/
 
-      - name: Unmount the DMG file
-        run: |
-          hdiutil detach "/Volumes/Appium 1.21.0" || hdiutil detach "/Volumes/Appium*"
+      # - name: Unmount the DMG file
+      #   run: |
+      #     hdiutil detach "/Volumes/Appium 1.21.0" || hdiutil detach "/Volumes/Appium*"
 
-      - run: xcrun simctl create arm-app com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-17-2
+      # - run: xcrun simctl create arm-app com.apple.CoreSimulator.SimDeviceType.iPhone-14 com.apple.CoreSimulator.SimRuntime.iOS-17-2
 
-      - run: |
-          cp -R ./appium-webdriveragent/* /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
-          cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
-          pwd
-          xcodebuild  -project WebDriverAgent.xcodeproj  \
-          -scheme WebDriverAgentRunner \
-          -destination 'platform=iOS Simulator,name=arm-app,OS=17.2'
-          appium --base-path=/wd/hub -p 4723 &
+      # - run: |
+      #     cp -R ./appium-webdriveragent/* /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
+      #     cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
+      #     pwd
+      #     xcodebuild  -project WebDriverAgent.xcodeproj  \
+      #     -scheme WebDriverAgentRunner \
+      #     -destination 'platform=iOS Simulator,name=arm-app,OS=17.2'
+      #     appium --base-path=/wd/hub -p 4723 &
 
-      - name: Run the test
-        run: |
-          robot testcases/ios.robot
+      # - name: Run the test
+      #   run: |
+      #     robot testcases/ios.robot
 
-      - run: ls -l
+      # - run: ls -l
