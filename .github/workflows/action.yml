@@ -12,15 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Xcode
-        run: |
-          # Install necessary tools
-          sudo xcode-select --switch /Applications/Xcode.app
-
-      - name: List available devices
-        run: |
-          # List available simulators for iOS, macOS, tvOS, and watchOS
-          xcrun xctrace list devices
+      # - name: Set up Xcode
+      #   run: |
+      #     # Install necessary tools
+      #     sudo xcode-select --switch /Applications/Xcode.app
 
       - name: Cache npm globally installed packages
         id: npm-cache
@@ -39,4 +34,10 @@ jobs:
             npm install -g appium
           fi
 
-      - run: losof -i :4723
+      - name: Start Appium Server
+        run: |
+          appium --base-path /wd/hub &
+        env:
+          PATH: /usr/local/bin:$PATH
+
+      - run: lsof -i :4723
