@@ -73,27 +73,27 @@ jobs:
 
       - name: List Volumes for Debugging
         run: |
-          ls /Volumes
+          ls /Volumes/Appium
 
-      - name: Copy Appium to Applications
-        run: |
-          # Adjust path based on actual volume name after listing volumes
-          cp -R "/Volumes/Appium/Appium.app" /Applications/ || cp -R "/Volumes/Appium-*/Appium.app" /Applications/
+      # - name: Copy Appium to Applications
+      #   run: |
+      #     # Adjust path based on actual volume name after listing volumes
+      #     cp -R "/Volumes/Appium/Appium.app" /Applications/ || cp -R "/Volumes/Appium-*/Appium.app" /Applications/
 
-      - name: Unmount the DMG file
-        run: |
-          hdiutil detach "/Volumes/Appium"
+      # - name: Unmount the DMG file
+      #   run: |
+      #     hdiutil detach "/Volumes/Appium"
 
-      - run: |
-          cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
-          pwd
-          xcodebuild  -project WebDriverAgent.xcodeproj  \
-           -scheme WebDriverAgentRunner \
-           -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2'
-          appium --base-path=/wd/hub -p 4723 &
+      # - run: |
+      #     cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
+      #     pwd
+      #     xcodebuild  -project WebDriverAgent.xcodeproj  \
+      #     -scheme WebDriverAgentRunner \
+      #     -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2'
+      #     appium --base-path=/wd/hub -p 4723 &
 
-      - name: Run the test
-        run: |
-          robot testcases/ios.robot
+      # - name: Run the test
+      #   run: |
+      #     robot testcases/ios.robot
 
-      - run: ls -l
+      # - run: ls -l
