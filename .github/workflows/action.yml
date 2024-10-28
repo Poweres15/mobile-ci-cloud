@@ -13,15 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: "16"
-
-      # - name: Install Dependencies
-      #   run: |
-      #     npm install
-
       - name: Set up Xcode and iOS Simulator
         run: |
           sudo xcode-select --switch /Applications/Xcode.app
@@ -30,6 +21,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "16"
+
+      - name: Cache global npm packages
+        uses: actions/cache@v2
+        with:
+          path: /usr/local/lib/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Start Appium Server
         run: |
