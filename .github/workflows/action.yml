@@ -78,11 +78,11 @@ jobs:
       - name: Copy Appium to Applications
         run: |
           # Adjust path based on actual volume name after listing volumes
-          cp -R "/Volumes/Appium*/Appium.app" /Applications/
+          cp -R "/Volumes/Appium 1.21.0/Appium.app" /Applications/
 
       - name: Unmount the DMG file
         run: |
-          hdiutil detach "/Volumes/Appium"
+          hdiutil detach "/Volumes/Appium 1.21.0" || hdiutil detach "/Volumes/Appium*"
 
       - run: |
           cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
