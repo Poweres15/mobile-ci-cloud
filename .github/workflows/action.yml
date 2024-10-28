@@ -22,14 +22,6 @@ jobs:
         with:
           node-version: "16"
 
-      # - name: Cache global npm packages
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: "~/.npm"
-      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-node-
-
       - name: Cache npm global packages
         uses: actions/cache@v3
         with:
@@ -45,8 +37,30 @@ jobs:
 
       - name: Start Appium Server
         run: |
-          appium --base-path /wd/hub &
+          appium --base-path=/wd/hub -p 4723 &
 
-      - run: npm root -g
-      - run: appium driver list
-      - run: which appium
+          - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.x'
+
+      - name: Cache Python packages
+        uses: actions/cache@v3
+        with:
+          # Cache location for pip
+          path: ~/.cache/pip
+          # Generate a unique key based on OS, Python version, and requirements.txt
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          # Use a partial key to restore similar caches if an exact match isn't found
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run the test
+        run: |
+          robot testcases/ios.robot
+
+      - run: ls -l
