@@ -42,7 +42,7 @@ jobs:
       - run: appium driver list
 
       - run: which appium
-      - run: ls -la /usr/local
+      - run: ls -la /usr/local/bin/node_modules
       #   uses: actions/setup-python@v2
       #   with:
       #     python-version: "3.x"
