@@ -65,6 +65,6 @@ jobs:
 
       - name: Run the test
         run: |
-          robot testcases/ios.robot
+          robot -v testcases/ios.robot
 
       - run: ls -l
