@@ -63,8 +63,11 @@ jobs:
       - name: Boot iOS Simulator
         run: xcrun simctl boot "iPhone 15"
 
+      - name: check if simu is running
+        run: xcrun simctl list devices
+
       - name: Run the test
         run: |
-          robot -v testcases/ios.robot
+          robot testcases/ios.robot
 
       - run: ls -l
