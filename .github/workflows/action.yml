@@ -32,12 +32,6 @@ jobs:
 
       - name: Start Appium Server
         run: |
-          if ! command -v appium &> /dev/null; then
-            echo "Appium not found, installing..."
-            npm install -g appium
-          else
-            echo "Appium is already installed."
-          fi
           appium --base-path /wd/hub &
 
       - run: npm root -g
