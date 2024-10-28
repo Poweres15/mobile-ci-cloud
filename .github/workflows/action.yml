@@ -25,7 +25,7 @@ jobs:
       - name: Cache global npm packages
         uses: actions/cache@v2
         with:
-          path: /Users/runner/hostedtoolcache
+          path: /Users/runner/hostedtoolcache/node/16.20.1/arm64/lib/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
