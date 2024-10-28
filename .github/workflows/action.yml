@@ -22,9 +22,21 @@ jobs:
           # List available simulators for iOS, macOS, tvOS, and watchOS
           xcrun xctrace list devices
 
-      - name: Start Appium Server
-        run: |
-          npm install -g appium
-          appium --base-path /wd/hub &
+      - name: Cache npm globally installed packages
+        id: npm-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            $(npm root -g)
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-appium
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
-      - run: echo 'Done'
+      - name: Install Appium if not cached
+        run: |
+          if ! command -v appium &> /dev/null; then
+            npm install -g appium
+          fi
+
+      - run: losof -i :4723
