@@ -66,7 +66,7 @@ jobs:
 
       - run: npm install -g appium-webdriveragent
 
-      - run: ls -la ~/.npm-global
+      - run: ls -la ~/.npm-global/lib
       # - run: |
       #     xcodebuild -project WebDriverAgent.xcodeproj \
       #      -scheme WebDriverAgentRunner \
