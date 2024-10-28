@@ -68,7 +68,7 @@ jobs:
 
       - run: cd  ~/.npm-global/lib/node_modules/appium-webdriveragent
       - run: |
-          xcodebuild -project WebDriverAgent.xcodeproj \
+          xcodebuild \
            -scheme WebDriverAgentRunner \
            -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
            test
