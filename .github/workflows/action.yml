@@ -16,6 +16,14 @@ jobs:
       #   run: |
       #     # Install necessary tools
       #     sudo xcode-select --switch /Applications/Xcode.app
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Install Dependencies
+        run: |
+          npm install
 
       - name: Cache npm globally installed packages
         id: npm-cache
