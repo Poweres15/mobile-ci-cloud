@@ -68,7 +68,7 @@ jobs:
           pwd
           xcodebuild  -project WebDriverAgent.xcodeproj  \
            -scheme WebDriverAgentRunner \
-           -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2'
+           -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2'
 
       - name: Run the test
         run: |
