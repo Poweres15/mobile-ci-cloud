@@ -3,8 +3,8 @@ Library    AppiumLibrary
 
 *** Variables ***
 ${PLATFORM_NAME}           iOS
-${PLATFORM_VERSION}        17.0  # Change to match your iOS version
-${DEVICE_NAME}             iPhone 12  # Change to match your simulator device
+${PLATFORM_VERSION}        17.2  # Change to match your iOS version
+${DEVICE_NAME}             iPhone 15  # Change to match your simulator device
 ${APP_PATH}                ${EXECDIR}/app/MVCTodo.app
 ${APPIUM_SERVER}           http://localhost:4723/wd/hub
 
