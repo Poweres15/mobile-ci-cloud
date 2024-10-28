@@ -63,8 +63,12 @@ jobs:
       - name: Boot iOS Simulator
         run: xcrun simctl boot "B8B4F5F1-B485-4B84-8698-BCD628736511"
 
-      - name: check if simu is running
-        run: xcrun simctl list devices
+      - run: npm install -g appium-webdriveragent
+      - run: |
+          xcodebuild -project WebDriverAgent.xcodeproj \
+           -scheme WebDriverAgentRunner \
+           -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
+           test
 
       - name: Run the test
         run: |
