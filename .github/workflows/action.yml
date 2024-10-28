@@ -37,7 +37,7 @@ jobs:
 
       - name: Start Appium Server
         run: |
-          npm install -g appium@1.21.0
+          npm install -g appium@2.1.3
           appium driver install xcuitest
           appium --base-path=/wd/hub -p 4723 &
 
