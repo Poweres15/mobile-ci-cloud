@@ -36,7 +36,7 @@ jobs:
       - name: Start Appium Server
         run: |
           npm install -g appium@2.1.3
-          appium driver install xcuitest@7.27.
+          appium driver install xcuitest
 
       - run: appium driver list
 
