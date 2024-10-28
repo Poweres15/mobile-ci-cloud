@@ -1,0 +1,23 @@
+name: macOS Devices List
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  list-macos-devices:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Xcode
+        run: |
+          # Install necessary tools
+          sudo xcode-select --switch /Applications/Xcode.app
+
+      - name: List available devices
+        run: |
+          # List available simulators for iOS, macOS, tvOS, and watchOS
+          xcrun xctrace list devices
