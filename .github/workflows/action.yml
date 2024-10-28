@@ -25,10 +25,6 @@ jobs:
       - name: Set up Xcode and iOS Simulator
         run: |
           sudo xcode-select --switch /Applications/Xcode.app
-          # Boot iOS Simulator
-          xcrun simctl boot "iPhone 12" || echo "iPhone 12 simulator already running"
-          # Wait for simulator to be fully ready
-          xcrun simctl bootstatus "iPhone 12" -b
 
       - name: Start Appium Server
         run: |
