@@ -16,5 +16,5 @@ Launch App On iOS Simulator
     # # Add more interactions here, such as locating elements and simulating interactions
     # # For example:
     # # Click Element    xpath=//XCUIElementTypeButton[@name="Login"]
-    # AppiumLibrary.Capture Page Screenshot  showme.png
-   AppiumLibrary.Close Application
+    AppiumLibrary.Capture Page Screenshot  showme.png
+    AppiumLibrary.Close Application
