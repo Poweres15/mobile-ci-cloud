@@ -5,3 +5,6 @@ server:
     - xcuitest
   default-capabilities:
     wdaLocalPort: 8100
+    wdaStartupRetries: 3
+    wdaStartupRetryInterval: 20000
+    newCommandTimeout: 60
