@@ -78,14 +78,16 @@ jobs:
           hdiutil detach "/Volumes/Appium 1.21.0" || hdiutil detach "/Volumes/Appium*"
 
       - run: |
-          cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
-          pwd
-          xcodebuild  -project WebDriverAgent.xcodeproj  \
-          -scheme WebDriverAgentRunner \
-          -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2' \
-          CODE_SIGN_IDENTITY="test" DEVELOPMENT_TEAM="test"
+          # cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
+          # pwd
+          # xcodebuild  -project WebDriverAgent.xcodeproj  \
+          # -scheme WebDriverAgentRunner \
+          # -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2' \
+          # CODE_SIGN_IDENTITY="test" DEVELOPMENT_TEAM="test"
+          xcodebuild build-for-testing test-without-building -project /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -derivedDataPath /Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc -destination id=3C9A5AE0-C05B-444F-8E40-D1A044BE388D IPHONEOS_DEPLOYMENT_TARGET=17.2 GCC_TREAT_WARNINGS_AS_ERRORS=0 COMPILER_INDEX_STORE_ENABLE=NO
+
       - run: |
-          appium --config ./appium-config.yml --base-path=/wd/hub > appium1.log 2>&1 &
+          appium --config ./appium-config.yml  > appium1.log 2>&1 &
           sleep 10
       - name: Run the test
         run: |
