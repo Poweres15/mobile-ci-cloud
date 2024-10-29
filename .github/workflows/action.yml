@@ -10,13 +10,13 @@ jobs:
   run-ios-simulator-tests:
     runs-on: macos-latest
     steps:
-      - run: ls /Users/runner/Library/Developer/Xcode
       # - name: Checkout code
       #   uses: actions/checkout@v2
 
-      # - name: Set up Xcode and iOS Simulator
-      #   run: |
-      #     sudo xcode-select --switch /Applications/Xcode.app
+      - name: Set up Xcode and iOS Simulator
+        run: |
+          sudo xcode-select --switch /Applications/Xcode.app
+      - run: ls /Users/runner/Library/Developer
 
       # - name: Set up Node.js
       #   uses: actions/setup-node@v2
