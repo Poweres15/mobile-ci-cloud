@@ -10,94 +10,86 @@ jobs:
   run-ios-simulator-tests:
     runs-on: macos-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - run: ls -la ~/Library/Developer/CoreSimulator/Devices
+      # - name: Checkout code
+      #   uses: actions/checkout@v2
 
-      - name: Set up Xcode and iOS Simulator
-        run: |
-          sudo xcode-select --switch /Applications/Xcode.app
+      # - name: Set up Xcode and iOS Simulator
+      #   run: |
+      #     sudo xcode-select --switch /Applications/Xcode.app
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16"
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: "16"
 
-      # - name: Cache npm global packages
+      # # - name: Cache npm global packages
+      # #   uses: actions/cache@v3
+      # #   with:
+      # #     path: ~/.npm-global
+      # #     key: ${{ runner.os }}-npm-global-${{ hashFiles('**/package-lock.json') }}
+      # #     restore-keys: |
+      # #       ${{ runner.os }}-npm-global-
+
+      # # - name: Set npm global packages path
+      # #   run: |
+      # #     echo "NPM_CONFIG_PREFIX=~/.npm-global" >> $GITHUB_ENV
+      # #     echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
+      # - name: Start Appium Server
+      #   run: |
+      #     npm install -g appium@next
+      #     appium driver install xcuitest
+
+      # - name: www
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: "3.x"
+
+      # - name: Cache Python packages
       #   uses: actions/cache@v3
       #   with:
-      #     path: ~/.npm-global
-      #     key: ${{ runner.os }}-npm-global-${{ hashFiles('**/package-lock.json') }}
+      #     # Cache location for pip
+      #     path: ~/.cache/pip
+      #     # Generate a unique key based on OS, Python version, and requirements.txt
+      #     key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+      #     # Use a partial key to restore similar caches if an exact match isn't found
       #     restore-keys: |
-      #       ${{ runner.os }}-npm-global-
+      #       ${{ runner.os }}-pip-
 
-      # - name: Set npm global packages path
+      # - name: Install dependencies
       #   run: |
-      #     echo "NPM_CONFIG_PREFIX=~/.npm-global" >> $GITHUB_ENV
-      #     echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
-      - name: Start Appium Server
-        run: |
-          npm install -g appium@next
-          appium driver install xcuitest
+      #     pip install -r requirements.txt
 
-      - name: www
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x"
+      # # - run: npm install -g appium-webdriveragent
+      # - name: Download Appium dmg file
+      #   run: |
+      #     curl -L -o Appium.dmg https://github.com/appium/appium-desktop/releases/download/v1.21.0/Appium-mac-1.21.0.dmg
 
-      - name: Cache Python packages
-        uses: actions/cache@v3
-        with:
-          # Cache location for pip
-          path: ~/.cache/pip
-          # Generate a unique key based on OS, Python version, and requirements.txt
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          # Use a partial key to restore similar caches if an exact match isn't found
-          restore-keys: |
-            ${{ runner.os }}-pip-
+      # - name: Mount the DMG file
+      #   run: |
+      #     hdiutil attach Appium.dmg
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+      # - name: Copy Appium to Applications
+      #   run: |
+      #     # Adjust path based on actual volume name after listing volumes
+      #     cp -R "/Volumes/Appium 1.21.0/Appium.app" /Applications/
 
-      # - run: npm install -g appium-webdriveragent
-      - name: Download Appium dmg file
-        run: |
-          curl -L -o Appium.dmg https://github.com/appium/appium-desktop/releases/download/v1.21.0/Appium-mac-1.21.0.dmg
-
-      - name: Mount the DMG file
-        run: |
-          hdiutil attach Appium.dmg
-
-      - name: Copy Appium to Applications
-        run: |
-          # Adjust path based on actual volume name after listing volumes
-          cp -R "/Volumes/Appium 1.21.0/Appium.app" /Applications/
-
-      - name: Unmount the DMG file
-        run: |
-          hdiutil detach "/Volumes/Appium 1.21.0" || hdiutil detach "/Volumes/Appium*"
+      # - name: Unmount the DMG file
+      #   run: |
+      #     hdiutil detach "/Volumes/Appium 1.21.0" || hdiutil detach "/Volumes/Appium*"
 
       # - run: |
-      #     # cd  /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent
-      #     # pwd
-      #     # xcodebuild  -project WebDriverAgent.xcodeproj  \
-      #     # -scheme WebDriverAgentRunner \
-      #     # -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2' \
-      #     # CODE_SIGN_IDENTITY="test" DEVELOPMENT_TEAM="test"
-      #     xcodebuild build-for-testing test-without-building -project /Users/runner/.appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -derivedDataPath /Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc -destination id=3C9A5AE0-C05B-444F-8E40-D1A044BE388D IPHONEOS_DEPLOYMENT_TARGET=17.2 GCC_TREAT_WARNINGS_AS_ERRORS=0 COMPILER_INDEX_STORE_ENABLE=NO
+      #     appium --config ./appium-config.yml  > appium1.log 2>&1 &
+      #     sleep 10
+      # - name: Run the test
+      #   run: |
+      #     robot testcases/ios.robot
 
-      - run: |
-          appium --config ./appium-config.yml  > appium1.log 2>&1 &
-          sleep 10
-      - name: Run the test
-        run: |
-          robot testcases/ios.robot
-
-      - name: Upload Appium log as artifact
-        if: always() # Ensure this step runs regardless of previous step status
-        uses: actions/upload-artifact@v3
-        with:
-          name: appium-artifacts
-          path: |
-            appium1.log 
-            showme.png
+      # - name: Upload Appium log as artifact
+      #   if: always() # Ensure this step runs regardless of previous step status
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: appium-artifacts
+      #     path: |
+      #       appium1.log
+      #       showme.png
