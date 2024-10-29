@@ -10,7 +10,7 @@ jobs:
   run-ios-simulator-tests:
     runs-on: macos-latest
     steps:
-      - run: ls /Users/runner/Library/Developer/Xcode/DerivedData
+      - run: ls /Users/runner/Library/Developer/Xcode
       # - name: Checkout code
       #   uses: actions/checkout@v2
 
