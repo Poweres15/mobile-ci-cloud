@@ -12,7 +12,7 @@ ${APPIUM_SERVER}           http://localhost:4723
 Launch App On iOS Simulator
     [Tags]    iOS
     BuiltIn.Log To Console    hello world
-    AppiumLibrary.Open Application    ${APPIUM_SERVER}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    app=${APP_PATH}    automationName=XCUITest  wdaLocalPort=8100  wdaLaunchTimeout=360000  usePreinstalledWDA=${True}  prebuiltWDAPath=/Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc/Build/Products/Debug-iphoneos/WebDriverAgentRunner-Runner.app
+    AppiumLibrary.Open Application    ${APPIUM_SERVER}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    app=${APP_PATH}    automationName=XCUITest  wdaLocalPort=8100  wdaLaunchTimeout=360000  usePreinstalledWDA=${True}  prebuiltWDAPath=Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc/Build/Products/WebDriverAgentRunner_iphonesimulator17.5-arm64.xctestrun
     # # Add more interactions here, such as locating elements and simulating interactions
     # # For example:
     # # Click Element    xpath=//XCUIElementTypeButton[@name="Login"]

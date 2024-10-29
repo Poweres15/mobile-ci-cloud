@@ -7,4 +7,4 @@ server:
     wdaLocalPort: 8100
     wdaLaunchTimeout: 360000
     usePreinstalledWDA: true
-    prebuiltWDAPath: /Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc/Build/Products/Debug-iphoneos/WebDriverAgentRunner-Runner.app
+    prebuiltWDAPath: Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc/Build/Products/WebDriverAgentRunner_iphonesimulator17.5-arm64.xctestrun
