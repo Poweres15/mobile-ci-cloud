@@ -6,3 +6,5 @@ server:
   default-capabilities:
     wdaLocalPort: 8100
     wdaLaunchTimeout: 360000
+    usePreinstalledWDA: true
+    updatedWDABundleId: com.appium.WebDriverAgentRunner
