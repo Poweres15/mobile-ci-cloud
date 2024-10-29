@@ -62,7 +62,7 @@ jobs:
           key: ${{ runner.os }}-webdriveragent-${{ hashFiles('**/appium-config.yml') }}
           restore-keys: |
             ${{ runner.os }}-webdriveragent-
-      - run: /Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc/Build/Products/Debug-iphoneos
+      - run: ls /Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc/Build/Products/Debug-iphoneos
 
       # - run: |
       #     appium --config ./appium-config.yml  > appium1.log 2>&1 &
