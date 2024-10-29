@@ -5,3 +5,4 @@ server:
     - xcuitest
   default-capabilities:
     wdaLocalPort: 8100
+    wdaLaunchTimeout: 240000

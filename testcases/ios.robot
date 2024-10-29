@@ -12,7 +12,7 @@ ${APPIUM_SERVER}           http://localhost:4723/wd/hub
 Launch App On iOS Simulator
     [Tags]    iOS
     BuiltIn.Log To Console    hello world
-    AppiumLibrary.Open Application    ${APPIUM_SERVER}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    app=${APP_PATH}    automationName=XCUITest  wdaLocalPort=8100
+    AppiumLibrary.Open Application    ${APPIUM_SERVER}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    app=${APP_PATH}    automationName=XCUITest  wdaLocalPort=8100  wdaLaunchTimeout=240000
     # # Add more interactions here, such as locating elements and simulating interactions
     # # For example:
     # # Click Element    xpath=//XCUIElementTypeButton[@name="Login"]
