@@ -91,7 +91,7 @@ jobs:
 
       - name: Upload Appium log as artifact
         if: always() # Ensure this step runs regardless of previous step status
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: appium-log
           path: appium1.log # Path to your log file
