@@ -39,7 +39,7 @@ jobs:
           npm install -g appium@next
           appium driver install xcuitest
 
-      - name: www
+      - name: set up python
         uses: actions/setup-python@v2
         with:
           python-version: "3.x"
