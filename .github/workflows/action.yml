@@ -84,7 +84,9 @@ jobs:
           -scheme WebDriverAgentRunner \
           -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2' \
           CODE_SIGN_IDENTITY="test" DEVELOPMENT_TEAM="test"
-      - run: appium --config ./appium-config.yml --base-path=/wd/hub > appium1.log 2>&1 &
+      - run: |
+          appium --config ./appium-config.yml --base-path=/wd/hub > appium1.log 2>&1 &
+          sleep 10
       - name: Run the test
         run: |
           robot testcases/ios.robot
