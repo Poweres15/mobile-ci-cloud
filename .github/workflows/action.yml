@@ -10,63 +10,71 @@ jobs:
   run-ios-simulator-tests:
     runs-on: macos-latest
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Set up Xcode and iOS Simulator
         run: |
           sudo xcode-select --switch /Applications/Xcode.app
-      - run: ls /Users/runner/Library/Developer
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: "16"
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
 
-      # - name: Start Appium Server
-      #   run: |
-      #     npm install -g appium@next
-      #     appium driver install xcuitest
+      - name: Start Appium Server
+        run: |
+          npm install -g appium@next
+          appium driver install xcuitest
 
-      # - name: set up python
-      #   uses: actions/setup-python@v2
-      #   with:
-      #     python-version: "3.x"
+      - name: set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
 
-      # - name: Cache Python packages
-      #   uses: actions/cache@v3
-      #   with:
-      #     # Cache location for pip
-      #     path: ~/.cache/pip
-      #     # Generate a unique key based on OS, Python version, and requirements.txt
-      #     key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-      #     # Use a partial key to restore similar caches if an exact match isn't found
-      #     restore-keys: |
-      #       ${{ runner.os }}-pip-
+      - name: Cache Python packages
+        uses: actions/cache@v3
+        with:
+          # Cache location for pip
+          path: ~/.cache/pip
+          # Generate a unique key based on OS, Python version, and requirements.txt
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          # Use a partial key to restore similar caches if an exact match isn't found
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
-      # - name: Install dependencies
-      #   run: |
-      #     pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
 
-      # - name: Cache CoreSimulator Devices folder
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ~/Library/Developer/CoreSimulator/Devices/3C9A5AE0-C05B-444F-8E40-D1A044BE388D
-      #     key: ${{ runner.os }}-coresimulator-${{ hashFiles('**/appium-config.yml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-coresimulator-
-      # - run: |
-      #     appium --config ./appium-config.yml  > appium1.log 2>&1 &
-      #     sleep 10
-      # - name: Run the test
-      #   run: |
-      #     robot testcases/ios.robot
+      - name: Cache CoreSimulator Devices folder
+        uses: actions/cache@v3
+        with:
+          path: ~/Library/Developer/CoreSimulator/Devices/3C9A5AE0-C05B-444F-8E40-D1A044BE388D
+          key: ${{ runner.os }}-coresimulator-${{ hashFiles('**/appium-config.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-coresimulator-
 
-      # - name: Upload Appium log as artifact
-      #   if: always() # Ensure this step runs regardless of previous step status
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: appium-artifacts
-      #     path: |
-      #       appium1.log
-      #       showme.png
+      - name: Cache WebDriverAgent DerivedData folder
+        uses: actions/cache@v3
+        with:
+          path: /Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc
+          key: ${{ runner.os }}-webdriveragent-${{ hashFiles('**/appium-config.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-webdriveragent-
+
+      - run: |
+          appium --config ./appium-config.yml  > appium1.log 2>&1 &
+          sleep 10
+      - name: Run the test
+        run: |
+          robot testcases/ios.robot
+
+      - name: Upload Appium log as artifact
+        if: always() # Ensure this step runs regardless of previous step status
+        uses: actions/upload-artifact@v3
+        with:
+          name: appium-artifacts
+          path: |
+            appium1.log
+            showme.png
