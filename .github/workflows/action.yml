@@ -98,9 +98,7 @@ jobs:
           java-version: "17"
           distribution: "temurin"
 
-      - run: ls $HOME
-
-      - name: Install Android SDK
-        run: |
-          sudo apt-get update
-          sudo apt update && sudo apt install android-sdk
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      - run: sdkmanager tools platform-tools
+      - run: which sdkmanager
