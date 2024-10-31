@@ -96,4 +96,5 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: "11"
+          distribution: "temurin"
       - run: ls $JAVA_HOME
