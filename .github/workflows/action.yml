@@ -85,7 +85,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ANDROID_HOME: ${{ runner.tool_cache }}/android-sdk
+      ANDROID_HOME: $HOME/android-sdk
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
 
     steps:
