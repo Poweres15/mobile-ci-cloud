@@ -97,10 +97,8 @@ jobs:
         with:
           java-version: "17"
           distribution: "temurin"
-      - run: ls $JAVA_HOME
-      - run: java -version
 
-      - run: echo $ANDROID_HOME
+      - run: ls $HOME
 
       - name: Install Android SDK
         run: |
