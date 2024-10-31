@@ -1,0 +1,7 @@
+# appium1.yml
+server:
+  port: 4724
+  use-drivers:
+    - xcuitest
+  default-capabilities:
+    showXcodeLog: true
