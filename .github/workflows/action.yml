@@ -85,7 +85,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ANDROID_HOME: $HOME/android-sdk
+      ANDROID_HOME: /usr/local/lib/android/sdk
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
 
     steps:
@@ -102,3 +102,4 @@ jobs:
         uses: android-actions/setup-android@v3
       - run: sdkmanager tools platform-tools
       - run: which sdkmanager
+      - run: ls -la $ANDROID_HOME
