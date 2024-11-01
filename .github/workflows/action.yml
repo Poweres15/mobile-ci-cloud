@@ -104,3 +104,4 @@ jobs:
       - run: which sdkmanager
       - run: ls -la $ANDROID_HOME
       - run: ls -la $ANDROID_HOME/cmdline-tools/latest/bin
+      - run: ls -la $ANDROID_HOME/tools
