@@ -81,28 +81,53 @@ jobs:
   #           showme.png
 
   #android
-  run-android-emulator-tests:
+  # run-android-emulator-tests:
+  #   runs-on: ubuntu-latest
+
+  #   env:
+  #     ANDROID_HOME: /usr/local/lib/android/sdk
+  #     JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  #     # Set up Java
+  #     - name: Set up Java
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         java-version: "17"
+  #         distribution: "temurin"
+
+  #     - name: Setup Android SDK
+  #       uses: android-actions/setup-android@v3
+  #     - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed
+  #     - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list
+  #     - run: adb devices
+  #     - run: $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager list avd
+  #     - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;google_apis_playstore;x86"
+  #     - run: ls $ANDROID_HOME/system-images/android-30/google_apis_playstore/
+
+  #custom action
+  test:
     runs-on: ubuntu-latest
-
-    env:
-      ANDROID_HOME: /usr/local/lib/android/sdk
-      JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      # Set up Java
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: "17"
-          distribution: "temurin"
+      - name: checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-      - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed
-      - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 21
+          target: google_apis
+          arch: x86_64
+          profile: Nexus 6
+          script: |
+            ./gradlew connectedCheck
+            adb devices
       - run: adb devices
-      - run: $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager list avd
-      - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;google_apis_playstore;x86"
-      - run: ls $ANDROID_HOME/system-images/android-30/google_apis_playstore/

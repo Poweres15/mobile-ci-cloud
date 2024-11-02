@@ -3,9 +3,9 @@ Library    AppiumLibrary
 
 *** Variables ***
 ${PLATFORM_NAME}           Android
-${PLATFORM_VERSION}        11.0  # Change to match your iOS version
-${DEVICE_NAME}             emulator  # Change to match your simulator device
-${APP_PATH}                /app/android/ColorNote.apk
+${PLATFORM_VERSION}        10.0  # Change to match your iOS version
+${DEVICE_NAME}             is_it_matter  # Change to match your simulator device
+${APP_PATH}                /Users/powereskitikonrat/appium-typescript/app/android/ColorNote.apk
 ${APPIUM_SERVER}           http://localhost:4723
 
 *** Test Cases ***
