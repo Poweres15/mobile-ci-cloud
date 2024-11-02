@@ -101,4 +101,4 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
       - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list_installed
-      - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list-installed$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list
+      - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list
