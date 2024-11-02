@@ -128,6 +128,5 @@ jobs:
           arch: x86_64
           profile: Nexus 6
           script: |
-            ./gradlew connectedCheck
-            adb devices
-      - run: adb devices
+            /usr/local/lib/android/sdk/platform-tools/adb devices
+      - run: /usr/local/lib/android/sdk/platform-tools/adb devices
