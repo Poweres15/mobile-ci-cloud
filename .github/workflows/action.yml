@@ -133,7 +133,7 @@ jobs:
         with:
           python-version: "3.x"
       - run: |
-          appium --config ./appium-config.yml  > appium1.log 2>&1 &
+          appium   > appium1.log 2>&1 &
 
       - name: Enable KVM
         run: |
