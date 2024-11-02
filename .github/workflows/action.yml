@@ -104,5 +104,5 @@ jobs:
       - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list
       - run: adb devices
       - run: $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager list avd
-      - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager install "system-images;android-30;google_apis_playstore;x86"
+      - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;google_apis_playstore;x86"
       - run: ls $ANDROID_HOME/system-images/android-30/google_apis_playstore/
