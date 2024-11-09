@@ -41,11 +41,8 @@ jobs:
       - name: Cache Python packages
         uses: actions/cache@v3
         with:
-          # Cache location for pip
           path: ~/.cache/pip
-          # Generate a unique key based on OS, Python version, and requirements.txt
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          # Use a partial key to restore similar caches if an exact match isn't found
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -68,13 +65,13 @@ jobs:
           key: ${{ runner.os }}-webdriveragent-${{ hashFiles('**/appium-config.yml') }}
           restore-keys: |
             ${{ runner.os }}-webdriveragent-
-      # - run: ls /Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc/Build/Products/Debug-iphonesimulator/WebDriverAgentRunner-Runner.app
-      - run: |
-          appium --config ./appium-config.yml  > appium1.log 2>&1 &
-          sleep 10
-      - name: Run the test
-        run: |
-          robot testcases/ios.robot
+      - run: ls /Users/runner/Library/Developer/Xcode/DerivedData/WebDriverAgent-dtmoeonrefnxsncuficthanbldlc/Build/Products/Debug-iphonesimulator
+      # - run: |
+      #     appium --config ./appium-config.yml  > appium1.log 2>&1 &
+      #     sleep 10
+      # - name: Run the test
+      #   run: |
+      #     robot testcases/ios.robot
 
       - name: Upload Appium log as artifact
         if: always() # Ensure this step runs regardless of previous step status
