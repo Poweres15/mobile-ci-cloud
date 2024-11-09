@@ -140,6 +140,16 @@ jobs:
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
+
+      - name: AVD cache
+        uses: actions/cache@v4
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-30
+
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
@@ -156,11 +166,11 @@ jobs:
       #     script: |
       #       robot testcases/andriod.robot
 
-      - name: Upload Appium log as artifact
-        if: always() # Ensure this step runs regardless of previous step status
-        uses: actions/upload-artifact@v3
-        with:
-          name: appium-artifacts
-          path: |
-            appium1.log
-            showme.png
+      # - name: Upload Appium log as artifact
+      #   if: always() # Ensure this step runs regardless of previous step status
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: appium-artifacts
+      #     path: |
+      #       appium1.log
+      #       showme.png
