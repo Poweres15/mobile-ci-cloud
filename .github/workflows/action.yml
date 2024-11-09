@@ -6,7 +6,10 @@ on:
       platform:
         description: "platform"
         required: true
-        default: "android"
+        type: choice
+        options:
+          - android
+          - ios
 
 jobs:
   #ios
