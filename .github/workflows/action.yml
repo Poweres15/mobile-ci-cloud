@@ -145,6 +145,9 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
+      - name: Gradle cache
+        uses: gradle/actions/setup-gradle@v3
+
       - name: AVD cache
         uses: actions/cache@v4
         id: avd-cache
@@ -154,29 +157,31 @@ jobs:
             ~/.android/adb*
           key: avd-30
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
         with:
-          java-version: "17"
-          distribution: "temurin"
+          api-level: 30
+          target: google_apis
+          arch: x86_64
+          profile: Nexus 6
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - run: $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager list avd
-
-  # - name: run tests
-  #   uses: reactivecircus/android-emulator-runner@v2
-  #   with:
-  #     api-level: 30
-  #     target: google_apis
-  #     arch: x86_64
-  #     profile: Nexus 6
-  #     force-avd-creation: false
-  #     emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-  #     disable-animations: true
-  #     script: |
-  #       robot testcases/andriod.robot
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          target: google_apis
+          arch: x86_64
+          profile: Nexus 6
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: |
+            robot testcases/andriod.robot
 
   # - name: Upload Appium log as artifact
   #   if: always() # Ensure this step runs regardless of previous step status
