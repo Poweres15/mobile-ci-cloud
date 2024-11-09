@@ -1,4 +1,4 @@
-name: iOS Simulator Test
+name: CI mobile test automation
 
 on:
   workflow_dispatch:
@@ -12,7 +12,6 @@ on:
           - ios
 
 jobs:
-  #ios
   ios_pipeline:
     if: ${{ github.event.inputs.platform == 'ios' }}
     runs-on: macos-latest
