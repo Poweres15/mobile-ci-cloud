@@ -1,10 +1,12 @@
 name: iOS Simulator Test
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+    inputs:
+      platform:
+        description: "platform"
+        required: true
+        default: "android"
 
 jobs:
   #ios
@@ -164,7 +166,7 @@ jobs:
           api-level: 30
           target: google_apis
           arch: x86_64
-          # profile: Nexus 6
+          profile: Nexus 6
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
@@ -176,17 +178,17 @@ jobs:
           api-level: 30
           target: google_apis
           arch: x86_64
-          # profile: Nexus 6
+          profile: Nexus 6
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
             robot testcases/andriod.robot
-  # - name: Upload Appium log as artifact
-  #   if: always() # Ensure this step runs regardless of previous step status
-  #   uses: actions/upload-artifact@v3
-  #   with:
-  #     name: appium-artifacts
-  #     path: |
-  #       appium1.log
-  #       showme.png
+      - name: Upload Appium log as artifact
+        if: always() # Ensure this step runs regardless of previous step status
+        uses: actions/upload-artifact@v3
+        with:
+          name: appium-artifacts
+          path: |
+            appium1.log
+            showme.png
