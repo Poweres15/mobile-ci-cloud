@@ -46,9 +46,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      # - name: Install dependencies
-      #   run: |
-      #     pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
 
       - name: Cache CoreSimulator Devices folder
         uses: actions/cache@v3
@@ -65,14 +65,14 @@ jobs:
           key: ${{ runner.os }}-webdriveragent-${{ hashFiles('**/appium-config.yml') }}
           restore-keys: |
             ${{ runner.os }}-webdriveragent-
-      - run: ls /Users/runner/Library/Developer/Xcode/DerivedData
-      # - run: |
-      #     appium --config ./appium-config.yml  > appium1.log 2>&1 &
-      #     sleep 10
-      # - name: Run the test
-      #   run: |
-      #     robot testcases/ios.robot
 
+      - run: |
+          appium --config ./appium-config.yml  > appium1.log 2>&1 &
+          sleep 10
+      - name: Run the test
+        run: |
+          robot testcases/ios.robot
+      - run: ls /Users/runner/Library/Developer/Xcode/DerivedData
       - name: Upload Appium log as artifact
         if: always() # Ensure this step runs regardless of previous step status
         uses: actions/upload-artifact@v3
