@@ -110,6 +110,10 @@ jobs:
   #custom action
   test:
     runs-on: ubuntu-latest
+
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
+      JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -159,24 +163,26 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      # - name: run tests
-      #   uses: reactivecircus/android-emulator-runner@v2
-      #   with:
-      #     api-level: 30
-      #     target: google_apis
-      #     arch: x86_64
-      #     profile: Nexus 6
-      #     force-avd-creation: false
-      #     emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-      #     disable-animations: true
-      #     script: |
-      #       robot testcases/andriod.robot
+      - run: $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager list avd
 
-      # - name: Upload Appium log as artifact
-      #   if: always() # Ensure this step runs regardless of previous step status
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: appium-artifacts
-      #     path: |
-      #       appium1.log
-      #       showme.png
+  # - name: run tests
+  #   uses: reactivecircus/android-emulator-runner@v2
+  #   with:
+  #     api-level: 30
+  #     target: google_apis
+  #     arch: x86_64
+  #     profile: Nexus 6
+  #     force-avd-creation: false
+  #     emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+  #     disable-animations: true
+  #     script: |
+  #       robot testcases/andriod.robot
+
+  # - name: Upload Appium log as artifact
+  #   if: always() # Ensure this step runs regardless of previous step status
+  #   uses: actions/upload-artifact@v3
+  #   with:
+  #     name: appium-artifacts
+  #     path: |
+  #       appium1.log
+  #       showme.png
