@@ -114,9 +114,9 @@ jobs:
 
   #custom action
 
-  test:
+  android_pipeline:
     runs-on: ubuntu-latest
-
+    if: ${{ github.event.inputs.platform == 'android' }}
     env:
       ANDROID_HOME: /usr/local/lib/android/sdk
     steps:
