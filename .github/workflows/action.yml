@@ -1,4 +1,4 @@
-name: CI mobile test automation
+name: CI Mobile Test Automation
 
 on:
   workflow_dispatch:
