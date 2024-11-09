@@ -113,7 +113,6 @@ jobs:
 
     env:
       ANDROID_HOME: /usr/local/lib/android/sdk
-      JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
     steps:
       - name: checkout
         uses: actions/checkout@v4
