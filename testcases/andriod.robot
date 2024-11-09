@@ -9,7 +9,7 @@ ${APP_PATH}                 ${EXECDIR}/app/ColorNote.apk
 ${APPIUM_SERVER}           http://localhost:4723
 
 *** Test Cases ***
-Launch App On iOS Simulator
+Launch App On Android Emulatoe
     [Tags]    Android
     BuiltIn.Log To Console    hello world
     AppiumLibrary.Open Application    ${APPIUM_SERVER}  automationName=UiAutomator2    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}    app=${APP_PATH} 
