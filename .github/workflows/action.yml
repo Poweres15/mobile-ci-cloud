@@ -175,6 +175,9 @@ jobs:
       #     disable-animations: true
       #     script: |
       #       robot testcases/andriod.robot
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
       - run: /usr/local/lib/android/sdk/emulator/emulator -port 5554 -avd test -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none &
 
       # - name: Upload Appium log as artifact
